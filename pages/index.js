@@ -3,6 +3,8 @@ import PrimaryButton from "../components/primary-button";
 import abi from "../utils/Keyboards.json"
 import { ethers } from "ethers";
 import Keyboard from "../components/keyboard"
+import addressesEqual from "../utils/addressEquals";
+import { UserCircleIcon } from "@heroicons/react/solid"
 
 export default function Home() {
   const [ethereum, setEthereum] = useState(undefined);
@@ -114,6 +116,12 @@ export default function Home() {
               <Keyboard key={i} kind={kind} isPBT={isPBT} filter={filter} />
             )
           )}
+          <span className="absolute top-1 right-6">
+            {addressesEqual(owner, connectedAccount) ?
+              <UserCircleIcon className="h-5 w-5 text-indigo-100" /> :
+              <TipButton ethereum={ethereum} index={i} />
+            }
+          </span>
         </div>
       </div>
     )
